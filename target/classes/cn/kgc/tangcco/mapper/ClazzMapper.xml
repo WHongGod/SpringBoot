@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.kgc.tangcco.mapper.ClazzMapper">
+    <resultMap id="clazzMap" type="cn.kgc.tangcco.entity.Clazz">
+        <id property="cid" column="cid"/>
+        <association property="room" column="rid" select="cn.kgc.tangcco.mapper.RoomMapper.selectRoomByRid"/>
+    </resultMap>
+    <select id="selectAllClazz" resultMap="clazzMap">
+        select * from class
+    </select>
+    <select id="selectClazzByCid" resultMap="clazzMap">
+        select * from class where cid=#{cid}
+    </select>
+    <select id="selectClazzByRid" resultType="cn.kgc.tangcco.entity.Clazz">
+        select * from class where rid=#{rid}
+    </select>
+</mapper>

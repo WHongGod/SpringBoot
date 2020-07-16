@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.kgc.tangcco.mapper.StudentMapper">
+    <resultMap id="studentMap" type="cn.kgc.tangcco.entity.Student">
+        <id property="sid" column="sid"/>
+        <association property="clazz" column="cid" select="cn.kgc.tangcco.mapper.ClazzMapper.selectClazzByCid"/>
+        <collection property="courses" column="sid" select="cn.kgc.tangcco.mapper.CourseMapper.selectCourseBySid"/>
+    </resultMap>
+    <select id="selectAllStudent" resultMap="studentMap">
+        select * from student
+        <if test="cid!=null">
+            where cid=#{cid}
+        </if>
+        limit #{start},#{length}
+    </select>
+    <select id="selectStudentByCid" resultMap="studentMap">
+        select s.* from student s,relation r where s.sid=r.sid and r.cid=#{cid}
+    </select>
+</mapper>

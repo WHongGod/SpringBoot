@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.kgc.tangcco.mapper.RoomMapper">
+    <resultMap id="roomMap" type="cn.kgc.tangcco.entity.Classroom">
+        <id property="rid" column="rid"/>
+        <association property="clazz" column="rid" select="cn.kgc.tangcco.mapper.ClazzMapper.selectClazzByRid"/>
+    </resultMap>
+    <select id="selectAllRoom" resultMap="roomMap">
+        select * from classroom
+    </select>
+    <select id="selectRoomByRid" resultMap="roomMap">
+        select * from classroom where rid=#{rid}
+    </select>
+</mapper>
