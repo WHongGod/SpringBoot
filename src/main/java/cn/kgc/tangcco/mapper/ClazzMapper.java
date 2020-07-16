@@ -8,4 +8,5 @@ public interface ClazzMapper {
     List<Clazz> selectAllClazz();
     Clazz selectClazzByCid(Integer cid);
     Clazz selectClazzByRid(Integer rid);
+
 }
